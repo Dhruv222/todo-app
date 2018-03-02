@@ -14,10 +14,8 @@ export class CreateTodoComponent implements OnInit {
   text: string;
   due_on: number;
   todo$;
+  todo_id: number;
   createTodo() {
-    this.todo$.map((todos) => {
-      console.log(todos);
-    });
     this.store.dispatch(
       new TodoActions.CreateTodo({
         id: --this.todo$,
@@ -28,16 +26,7 @@ export class CreateTodoComponent implements OnInit {
   }
 
   constructor(public store: Store<State>) {
-    this.todo$ = store.select(getTodos).pipe(
-      map((todos) => {
-        console.log(todos);
-        return todos[0].id;
-      }),
-      catchError((err) => {
-        store.dispatch(new TodoActions.GetTodos());
-        return of(NaN);
-      }),
-    );
+    this.todo$ = store.select(getTodos);
   }
 
   ngOnInit() {}
