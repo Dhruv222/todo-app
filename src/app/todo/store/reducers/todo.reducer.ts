@@ -106,3 +106,7 @@ export const getTodos = createSelector(
   getTodosState,
   (state: State) => state.todos,
 );
+export const getNewTodoID = createSelector(
+  getTodosState,
+  (state: State) => state.todos[0].id,
+);

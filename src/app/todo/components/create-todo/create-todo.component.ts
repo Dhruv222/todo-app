@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as TodoActions from '../../store/actions/todo.actions';
-import { State, getTodos } from '../../store/reducers/todo.reducer';
+import { State, getNewTodoID } from '../../store/reducers/todo.reducer';
 import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+import { Observable } from 'rxjs/observable';
 
 @Component({
   selector: 'app-create-todo',
@@ -13,12 +14,15 @@ import { of } from 'rxjs/observable/of';
 export class CreateTodoComponent implements OnInit {
   text: string;
   due_on: number;
-  todo$;
+  todo$: Observable<number>;
   todo_id: number;
+
   createTodo() {
+    this.todo$.subscribe((num) => (this.todo_id = num));
+    console.log('Todo ID: ', this.todo_id);
     this.store.dispatch(
       new TodoActions.CreateTodo({
-        id: --this.todo$,
+        id: --this.todo_id,
         text: this.text,
         due_on: this.due_on,
       }),
@@ -26,7 +30,7 @@ export class CreateTodoComponent implements OnInit {
   }
 
   constructor(public store: Store<State>) {
-    this.todo$ = store.select(getTodos);
+    this.todo$ = store.select(getNewTodoID);
   }
 
   ngOnInit() {}
