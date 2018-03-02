@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-title>
+    Create A Todo
+  </mat-card-title>
+  <form form-control>
+    <div class="row justify-content-center">
+      <mat-form-field>
+        <input matInput placeholder="What is the Todo?" name="text" type="text" [(ngModel)]="text">
+      </mat-form-field>
+    </div>
+    <div class="row justify-content-center">
+      <mat-form-field>
+        <input [(ngModel)]="due_on" matInput type="number" name="due_on" placeholder="Enter the Year you want to finish this Todo">
+      </mat-form-field>
+    </div>
+    <mat-card-actions>
+      <div class="row justify-content-center">
+        <button mat-raised-button color='primary' (click)='createTodo()'>Create Todo</button>
+      </div>
+    </mat-card-actions>
+  </form>
+</mat-card>

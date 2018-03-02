@@ -1,5 +1,6 @@
 import * as TodoActions from '../actions/todo.actions';
 import { Todo, TodoError } from '../../models/todo.models';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
 
 export interface State {
   todos: Todo[];
@@ -99,4 +100,9 @@ export function TodoReducer(
  * Selectors
  */
 
-export const getTodos = (state: State) => state.todos;
+export const getTodosState = createFeatureSelector<State>('todo-app');
+
+export const getTodos = createSelector(
+  getTodosState,
+  (state: State) => state.todos,
+);

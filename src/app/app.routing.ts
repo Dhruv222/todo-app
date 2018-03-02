@@ -4,14 +4,13 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: './app.module#AppModule',
+    path: 'home',
+    component: AppComponent,
   },
   {
-    path: '/todos',
+    path: 'todos',
     loadChildren: './todo/todo.module#TodoModule',
   },
-  { path: '**', component: AppComponent },
 ];
 
 @NgModule({
